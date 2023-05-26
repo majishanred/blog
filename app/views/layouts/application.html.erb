@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <%= javascript_importmap_tags %>
+  </head>
+  <body class="container container-xxl">
+    <header class="container row container-fluid text-bg-primary rounded mb-4 align-items-center text-center">
+      <div class="container col-2 logo">
+        <h1 class="text-uppercase">myblog</h1>
+      </div>
+      <navbar class="container col">
+        <ul class="list-group list-group-horizontal">
+          <li class="list-group-item"><%= link_to "Posts", root_path %></li>
+          <li class="list-group-item"><%= link_to "Users", users_path %></li>
+          <li class="list-group-item"><%= link_to "My posts", "/my_posts" %></li>
+          <li class="list-group-item"><%= link_to "New post", new_post_path %></li>
+        </ul>
+      </navbar>
+      <% if current_user %>
+        <div class="btn-group container col-2">
+          <button type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Profile
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/users/edit">Edit My account</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><%= link_to "Exit", destroy_user_session_path, class: "dropdown-item", data: {
+                  turbo_method: :delete
+                } %></li>
+          </ul>
+        </div>
+      <% else %>
+        <div class="btn-group col">
+          <a href="/users/sign_in" class="btn btn-success col-1">Login</a>
+          <a href="/users/sign_up" class="btn btn-success col-1">Registration</a>
+        </div>
+      <% end %>
+    </header>
+
+
+    <%= yield %>
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js" integrity="sha384-zYPOMqeu1DAVkHiLqWBUTcbYfZ8osu1Nd6Z89ify25QV9guujx43ITvfi12/QExE" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.min.js" integrity="sha384-Y4oOpwW3duJdCWv5ly8SCFYWqFDsfob/3GkgExXKV4idmbt98QcxXYs9UoXAB7BZ" crossorigin="anonymous"></script>
+</html>

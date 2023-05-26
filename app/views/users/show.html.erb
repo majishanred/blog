@@ -1,0 +1,13 @@
+<div class="container">
+  <p style="color: green"><%= notice %></p>
+
+  <%= render @user %>  
+  
+  <div>
+    <% @user.posts.each do |post| %>
+      <div class="post container row border rounded-4 p-4 mb-4" style="width: 720px">
+        <%= render partial: "posts/post", locals: { post: post } %>
+      </div>
+    <% end %>
+  </div>
+</div>
